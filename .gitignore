@@ -6,7 +6,7 @@ cmd/explorer/__debug_bin
 modd.conf
 bin/
 docker/
-templates/imprint.html
+# templates/imprint.html
 config.yml
 frontend.yml
 config-staging.yml

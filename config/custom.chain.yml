@@ -1,0 +1,91 @@
+# Mainnet config
+
+# Extends the mainnet preset
+PRESET_BASE: 'mainnet'
+
+# Free-form short name of the network that this configuration applies to - known
+# canonical network names include:
+# * 'mainnet' - there can be only one
+# * 'prater' - testnet
+# Must match the regex: [a-z0-9\-]
+CONFIG_NAME: 'cleo'
+
+# Transition
+# ---------------------------------------------------------------
+# Estimated on Sept 15, 2022
+TERMINAL_TOTAL_DIFFICULTY: 0
+# By default, don't use these params
+TERMINAL_BLOCK_HASH: 0x09ec7348e14d37a735a8a7e12182673c6a5fedaf83d4ac0e785f5816b46c6fab
+TERMINAL_BLOCK_HASH_ACTIVATION_EPOCH: 0
+
+
+
+# Genesis
+# ---------------------------------------------------------------
+# `2**14` (= 16,384)
+MIN_GENESIS_ACTIVE_VALIDATOR_COUNT: 3
+# Dec 1, 2020, 12pm UTCcd
+MIN_GENESIS_TIME: 1694401200
+# Mainnet initial fork version, recommend altering for testnets
+GENESIS_FORK_VERSION: 0x00677693
+# 604800 seconds (7 days)
+GENESIS_DELAY: 1800
+
+
+# Forking
+# ---------------------------------------------------------------
+# Some forks are disabled for now:
+#  - These may be re-assigned to another fork-version later
+#  - Temporarily set to max uint64 value: 2**64 - 1
+
+# Altair
+ALTAIR_FORK_VERSION: 0x01677693
+ALTAIR_FORK_EPOCH: 0  # Oct 27, 2021, 10:56:23am UTC
+# Bellatrix
+BELLATRIX_FORK_VERSION: 0x02677693
+BELLATRIX_FORK_EPOCH: 0  # Sept 6, 2022, 11:34:47am UTC
+# Capella
+CAPELLA_FORK_VERSION: 0x03677693
+CAPELLA_FORK_EPOCH: 18446744073709551615  # April 12, 2023, 10:27:35pm UTC
+
+
+# Time parameters
+# ---------------------------------------------------------------
+SLOTS_PER_EPOCH: 32
+# 12 seconds
+SECONDS_PER_SLOT: 12
+# 14 (estimate from Eth1 mainnet)
+SECONDS_PER_ETH1_BLOCK: 14
+# 2**8 (= 256) epochs ~27 hours
+MIN_VALIDATOR_WITHDRAWABILITY_DELAY: 256
+# 2**8 (= 256) epochs ~27 hours
+SHARD_COMMITTEE_PERIOD: 256
+# 2**11 (= 2,048) Eth1 blocks ~8 hours
+ETH1_FOLLOW_DISTANCE: 2048
+
+
+# Validator cycle
+# ---------------------------------------------------------------
+# 2**2 (= 4)
+INACTIVITY_SCORE_BIAS: 4
+# 2**4 (= 16)
+INACTIVITY_SCORE_RECOVERY_RATE: 16
+# 2**4 * 10**9 (= 16,000,000,000) Gwei
+EJECTION_BALANCE: 16000000000
+# 2**2 (= 4)
+MIN_PER_EPOCH_CHURN_LIMIT: 4
+# 2**16 (= 65,536)
+CHURN_LIMIT_QUOTIENT: 65536
+
+
+# Fork choice
+# ---------------------------------------------------------------
+# 40%
+PROPOSER_SCORE_BOOST: 40
+
+# Deposit contract
+# ---------------------------------------------------------------
+# Ethereum PoW Mainnet
+DEPOSIT_CHAIN_ID: 130
+DEPOSIT_NETWORK_ID: 130
+DEPOSIT_CONTRACT_ADDRESS: 0x0420420420420420420420420420420420420420

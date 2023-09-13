@@ -1,64 +1,46 @@
 # Database credentials
-readerDatabase:
-  user: "<dbuser>"
-  name: "<dbname>"
-  host: "<dbhost>"
-  port: "<dbport>"
-  password: "<dbpassword>"
-writerDatabase:
-  user: "<dbuser>"
-  name: "<dbname>"
-  host: "<dbhost>"
-  port: "<dbport>"
-  password: "<dbpassword>"
-
-# Chain network configuration (example will work for the prysm testnet)
+database:
+  user: "postgres"
+  name: "db"
+  host: "localhost"
+  port: "5432"
+  password: "pass"
+# Chain network configuration
 chain:
-  name: "mainnet"
-
+  configPath: ./config/custom.chain.yml
+  genesisTimestamp: 1671553095
 # Note: It is possible to run either the frontend or the indexer or both at the same time
 # Frontend config
 frontend:
   enabled: true # Enable or disable to web frontend
-  siteName: "Ethereum Block Chain Explorer" # Name of the site, displayed in the title tag
-  siteSubtitle: "Showing the <a href='https://prylabs.net'>💎 Prysm Eth Testnet</a>" # Subtitle shown on the main page
+  imprint: "./imprint.html"  # Path to the imprint page content
+  siteName: "Kintsugi Explorer" # Name of the site, displayed in the title tag
+  siteSubtitle: "Kintsugi explorer" # Subtitle shown on the main page
   csrfAuthKey: '0123456789abcdef000000000000000000000000000000000000000000000000'
   jwtSigningSecret: "0123456789abcdef000000000000000000000000000000000000000000000000"
-  jwtIssuer: "beaconcha.in"
+  jwtIssuer: "localblockexplorer"
   jwtValidityInMinutes: 30
   server:
-    host: "localhost" # Address to listen on
+    host: "0.0.0.0" # Address to listen on
     port: "3333" # Port to listen on
-  readerDatabase:
-    user: "<dbuser>"
-    name: "<dbname>"
-    host: "<dbhost>"
-    port: "<dbport>"
-    password: "<dbpassword>"
-  writerDatabase:
-    user: "<dbuser>"
-    name: "<dbname>"
-    host: "<dbhost>"
-    port: "<dbport>"
-    password: "<dbpassword>"
-  sessionSecret: "<sessionSecret>"
-  email:
-    smtp:
-      server: "<emailserver>"
-      host: "<emailhost>"
-      user: "<emailuser>"
-      password: "<emailpassword>"
-  flashSecret: "" # Encryption secret for flash cookies
-
+  database:
+    user: "postgres"
+    name: "db"
+    host: "localhost"
+    port: "5432"
+    password: "pass"
+  # sessionSecret: "<sessionSecret>"
+  # flashSecret: "" # Encryption secret for flash cookies
 # Indexer config
 indexer:
   enabled: true # Enable or disable the indexing service
-  fullIndexOnStartup: false # Perform a one time full db index on startup
-  indexMissingEpochsOnStartup: false # Check for missing epochs and export them after startup
+  fullIndexOnStartup: true # Perform a one time full db index on startup
+  indexMissingEpochsOnStartup: true # Check for missing epochs and export them after startup
   node:
     host: "localhost" # Address of the backend node
-    port: "4000" # port of the backend node
-    type: "prysm" # can be either prysm or lighthouse
-    pageSize: 500 # the amount of entries to fetch per paged rpc call
-  eth1Endpoint: 'https://goerli.infura.io/v3/<api-token>'
-  eth1DepositContractFirstBlock: 2523557
+    port: "4000" # GRPC port of the Prysm node
+    type: "lighthouse" # can be either prysm or lighthouse
+    pageSize: 100 # the amount of entries to fetch per paged rpc call, TODO set to 500
+  eth1Endpoint: 'http://localhost:8545'
+  # Note: 0 is correct, but due to an underflow bug (being fixed), doesn't work.
+  eth1DepositContractFirstBlock: 1
